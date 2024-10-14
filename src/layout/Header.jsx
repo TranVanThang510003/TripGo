@@ -10,7 +10,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <img src="logo.png" />
 
-        {/* Search Input Container */}
+        {/* Input search */}
         <div className="relative">
           <input
             type="text"

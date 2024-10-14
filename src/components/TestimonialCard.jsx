@@ -1,15 +1,21 @@
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const TestimonialCard = () => {
   return (
     <div className="grid grid-cols-2 gap-8 justify-items-center mt-[100px] border-t">
-      {/* First Testimonial */}
+       {/* Muc  Testimonial */}
       <div className="text-center max-w-md mt-20 ">
         <p className="text-lg">
-          Trải nghiệm của chúng tôi với TripGo thật tuyệt vời. Trang web rất
-          thân thiện và giúp chúng tôi lên kế hoạch cho chuyến đi một cách suôn
-          sẻ. Quy trình đặt chỗ rất dễ dàng. Chúng tôi rất khuyến nghị TripGo
-          cho những ai muốn khám phá những điểm đến mới!
+          Mình vừa dùng TripGo và rất hài lòng. Tính năng AI tạo tour cá nhân
+          hóa giúp mình nhanh chóng có lịch trình phù hợp với sở thích. Giao
+          diện dễ dùng, tiện lợi, không cần mất thời gian lên kế hoạch. Rất đáng
+          thử!
         </p>
-        <p className="text-blue-500 font-bold mt-4">- Vand D</p>
+        <p className="text-blue-800 font-bold mt-4">- Vand D</p>
         <p className="text-gray-400">Happy Treloo</p>
         <div className="mt-4 flex justify-center relative">
           <img
@@ -24,14 +30,15 @@ const TestimonialCard = () => {
         </div>
       </div>
 
-      {/* Second Testimonial */}
+      {/* Muc 2 Testimonial */}
       <div className="text-center max-w-md mt-20">
         <p className="text-lg">
-          Our trip to Morocco was truly a once-in-a-lifetime experience, and we
-          are so grateful to everyone that made it happen seamlessly. Our travel
-          planner, Jaouad, was incredible.
+          Trải nghiệm của chúng tôi với TripGo thật tuyệt vời. Trang web giúp
+          chúng tôi lên kế hoạch cho chuyến đi một cách suôn sẻ. Quy trình đặt
+          chỗ rất dễ. Chúng tôi rất khuyến nghị TripGo cho những ai muốn khám
+          phá những điểm đến mới.
         </p>
-        <p className="text-blue-500 font-bold mt-4">- Tru Vio</p>
+        <p className="text-blue-800 font-bold mt-4">- Tru Vio</p>
         <p className="text-gray-400">Happy Treloo</p>
         <div className="mt-4 flex justify-center relative">
           <img
@@ -44,6 +51,15 @@ const TestimonialCard = () => {
             <span className="ml-1 font-bold">4.5</span>
           </div>
         </div>
+      </div>
+      {/* Nút chuyển trang */}
+      <div className="col-span-2  flex items-center gap-5 mt-12">
+        <button className="border border-blue-900 w-10 h-9 rounded-xl hover:bg-blue-800">
+          {<FontAwesomeIcon icon={faChevronLeft} />}
+        </button>
+        <button className="border border-blue-900 w-10 h-9 rounded-xl hover:bg-blue-800">
+          {<FontAwesomeIcon icon={faChevronRight} />}
+        </button>
       </div>
     </div>
   );

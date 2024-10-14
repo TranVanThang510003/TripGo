@@ -1,15 +1,17 @@
-import DestinationSuggestions from "../components/DestinationSuggestions ";
+import Header from "../layout/Header";
+import Navbar from "../layout/Navbar";
+import Footer from "../layout/Footer";
 import SpecialOffer from "../components/SpecialOffer";
-import TestimonialCard from "../components/TestimonialCard";
 import TravelSection from "../components/TravelSection";
-import Footer from "../Footer";
-import Header from "../Header";
-import Navbar from "../Navbar";
+import DestinationSuggestions from "../components/DestinationSuggestions ";
+import TestimonialCard from "../components/TestimonialCard";
+import Sidebar from "../layout/Sidebar";
 
 const HomePage = () => {
   return (
     <div>
       <Header />
+      <Sidebar />
       <Navbar />
       <SpecialOffer />
       <TravelSection />

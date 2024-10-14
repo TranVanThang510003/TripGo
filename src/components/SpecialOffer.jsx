@@ -20,7 +20,7 @@ const SpecialOffer = () => {
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Ưu đãi đặc biệt</h1>
 
       {/* Tabs lựa chọn */}
-      <div className="flex space-x-4 mb-8">
+      <div className="flex space-x-4 mb-8 border border-blue-200 rounded-md">
         <button className="px-4 py-2 hover:bg-blue-700 text-gray-700 rounded-md">
           Cá Nhân
         </button>
@@ -33,9 +33,12 @@ const SpecialOffer = () => {
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-12">
         {[0, 1, 2].map((index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs relative">
+          <div
+            key={index}
+            className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs relative"
+          >
             <div className="relative">
               <img
                 src="https://bcp.cdnchinhphu.vn/Uploaded_VGP/phamvanthua/20190725/0052583f41011fc2c2f516e5b4b693ec%20(1).jpg"
@@ -45,14 +48,14 @@ const SpecialOffer = () => {
               {/* Nút trái tim */}
               <button
                 className="absolute top-4 right-4 bg-white p-2 rounded-full shadow"
-                onClick={() => toggleFavorite(index)} // Chỉ thay đổi trạng thái của card hiện tại
+                onClick={() => toggleFavorite(index)} 
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
-                  fill={favorites[index] ? "#ff6b6b" : "white"} // Trái tim đổi màu khi nhấn
+                  fill={favorites[index] ? "#ff6b6b" : "white"} 
                   viewBox="0 0 24 24"
-                  stroke="#ff6b6b" // Viền hồng cho trái tim
+                  stroke="#ff6b6b" 
                 >
                   <path
                     fillRule="evenodd"
@@ -92,12 +95,15 @@ const SpecialOffer = () => {
                 Khởi hành từ Đà Nẵng, Hội An
               </p>
               <p className="text-gray-500 text-sm mb-4">
-                <span className="text-yellow-500">★ 4.5</span> (5K đánh giá) - 10K+ lượt đặt
+                <span className="text-yellow-500">★ 4.5</span> (5K đánh giá) -
+                10K+ lượt đặt
               </p>
             </div>
 
             <div className="flex justify-between items-center px-4 pb-4">
-              <p className="text-lg font-bold text-gray-800">1.864.000đ/Người</p>
+              <p className="text-lg font-bold text-gray-800">
+                1.864.000đ/Người
+              </p>
               <button className="bg-blue-100 text-blue-500 px-4 py-2 rounded-3xl border border-blue-500">
                 Đặt ngay
               </button>

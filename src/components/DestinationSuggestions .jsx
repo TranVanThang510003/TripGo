@@ -1,4 +1,3 @@
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 

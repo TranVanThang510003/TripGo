@@ -5,7 +5,7 @@ const TravelSection = () => {
       {/* Phần hình ảnh */}
       <div className="relative w-full lg:w-1/5 ml-[150px]">
         <img
-          src="https://statics.vinpearl.com/canh-dep-viet-nam-11_1634999614.jpg" // Thay thế bằng link ảnh thực tế
+          src="https://statics.vinpearl.com/canh-dep-viet-nam-11_1634999614.jpg" 
           alt="Du lịch"
           className="rounded-lg object-cover w-full h-96"
         />
@@ -47,7 +47,7 @@ const TravelSection = () => {
           trải nghiệm du lịch khó quên. Hãy cùng khám phá vẻ đẹp của Việt Nam
           ngay hôm nay!
         </p>
-        <button className=" bg-blue-500 text-white px-6 py-3 rounded-md shadow-lg hover:bg-blue-600 ">
+        <button className=" bg-blue-900 text-white px-6 py-3 rounded-md shadow-lg hover:bg-blue-600 ">
           Liên hệ với chúng tôi
         </button>
       </div>

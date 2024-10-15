@@ -1,7 +1,11 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import CompletionForm from './CompletionForm';
 
 function AuthForm({ type, onSubmit, onClose }) {
   const [emailOrPhone, setEmailOrPhone] = useState(''); // Lưu email hoặc số điện thoại
@@ -29,7 +33,51 @@ function AuthForm({ type, onSubmit, onClose }) {
     return passwordRegex.test(value);
   };
 
-  // Xử lý khi form được gửi
+  // Xử lý khi form đăng nhập được gửi
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    let emailOrPhoneError = '';
+    let passwordError = '';
+  
+    // Kiểm tra email hoặc số điện thoại
+    if (!validateEmail(emailOrPhone) && !validatePhone(emailOrPhone)) {
+      emailOrPhoneError = 'Email hoặc số điện thoại không hợp lệ!';
+    }
+  
+    // Kiểm tra mật khẩu
+    if (!validatePassword(password)) {
+      passwordError = 'Mật khẩu không hợp lệ!';
+    }
+  
+    if (emailOrPhoneError || passwordError) {
+      setErrors({ emailOrPhone: emailOrPhoneError, password: passwordError });
+      return; // Dừng hàm nếu có lỗi
+    }
+  
+    try {
+      // Gửi yêu cầu đến API để kiểm tra thông tin đăng nhập
+      const response = await axios.get('http://localhost:5000/users');
+      const users = response.data; 
+  
+      // Kiểm tra thông tin người dùng
+      const user = users.find(user =>
+        (user.email === emailOrPhone || user.username === emailOrPhone) && user.password === password
+      );
+  
+      if (!user) {
+        passwordError = 'Thông tin đăng nhập không đúng!';
+        setErrors({ password: passwordError });
+      } else {
+        // Nếu thông tin hợp lệ, chuyển đến trang chủ
+        window.location.href = '/home'; // Chuyển sang trang chủ
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu người dùng:", error.response ? error.response.data : error.message);
+      setErrors({ password: 'Có lỗi xảy ra trong quá trình đăng nhập. Vui lòng thử lại.' });
+    }
+  };
+  
+  // Xử lý khi form đăng ký được gửi
   const handleContinue = (e) => {
     e.preventDefault();
     let emailOrPhoneError = '';
@@ -80,8 +128,8 @@ function AuthForm({ type, onSubmit, onClose }) {
 
   return (
     <div className="modal-overlay"> {/* Modal overlay */}
-      <div className="login-container">
-        <div className="login-box">
+      <div className="auth-container">
+        <div className="auth-box">
           {/* Nút đóng */}
           <div className="close-btn-container">
             <button onClick={onClose} className="close-btn">
@@ -93,97 +141,41 @@ function AuthForm({ type, onSubmit, onClose }) {
           <h2>{type === 'login' ? 'Đăng Nhập' : showCompletionForm ? 'Hoàn Tất Đăng Ký' : 'Đăng Ký'}</h2>
 
           {/* Form nhập thông tin */}
-          <form onSubmit={showCompletionForm ? handleSubmit : handleContinue}>
-            {/* Bước đầu: chỉ nhập email hoặc số điện thoại */}
-            {!showCompletionForm && (
-              <>
-                <div className="input-group">
-                  <label>
-                    Email hoặc Số điện thoại <span style={{ color: 'red' }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Nhập email hoặc số điện thoại"
-                    value={emailOrPhone}
-                    onChange={handleInputChange(setEmailOrPhone, 'emailOrPhone')} // Xóa lỗi khi người dùng bắt đầu nhập lại
-                    required
-                  />
-                  {errors.emailOrPhone && <span className="error-text">{errors.emailOrPhone}</span>}
-                </div>
-
-                {/* Nút tiếp tục */}
-                <button type="submit" className="continue-btn">
-                  Tiếp tục
-                </button>
-              </>
+          <form onSubmit={type === 'login' ? handleLogin : showCompletionForm ? handleSubmit : handleContinue}>
+            {type === 'login' && (
+              <LoginForm
+                emailOrPhone={emailOrPhone}
+                password={password}
+                onEmailOrPhoneChange={handleInputChange(setEmailOrPhone, 'emailOrPhone')}
+                onPasswordChange={handleInputChange(setPassword, 'password')}
+                onSubmit={handleLogin}
+                errors={errors}
+              />
             )}
 
-            {/* Bước hoàn tất đăng ký: nhập họ tên, mật khẩu và xác nhận mật khẩu */}
+            {type === 'register' && !showCompletionForm && (
+              <RegisterForm
+                emailOrPhone={emailOrPhone}
+                onEmailOrPhoneChange={handleInputChange(setEmailOrPhone, 'emailOrPhone')}
+                onSubmit={handleContinue}
+                errors={errors}
+              />
+            )}
+
             {showCompletionForm && (
-              <>
-                <div className="input-group">
-                  <label>
-                    Họ và Tên <span style={{ color: 'red' }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Nhập họ và tên"
-                    value={fullName}
-                    onChange={handleInputChange(setFullName, 'fullName')}
-                    required
-                  />
-                </div>
-
-                {/* Hiển thị email nếu người dùng nhập email */}
-                {validateEmail(emailOrPhone) && (
-                  <div className="input-group">
-                    <label>Email</label>
-                    <input type="email" value={emailOrPhone} readOnly className="rOnly" />
-                  </div>
-                )}
-
-                {/* Hiển thị số điện thoại nếu người dùng nhập số điện thoại */}
-                {validatePhone(emailOrPhone) && (
-                  <div className="input-group">
-                    <label>Số điện thoại</label>
-                    <input type="text" value={emailOrPhone} readOnly className="rOnly" />
-                  </div>
-                )}
-
-                {/* Hiển thị trường nhập mật khẩu */}
-                <div className="input-group">
-                  <label>
-                    Mật khẩu <span style={{ color: 'red' }}>*</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Nhập mật khẩu"
-                    value={password}
-                    onChange={handleInputChange(setPassword, 'password')} // Xóa lỗi khi người dùng bắt đầu nhập lại
-                    required
-                  />
-                  {errors.password && <span className="error-text">{errors.password}</span>}
-                </div>
-
-                <div className="input-group">
-                  <label>
-                    Nhập lại mật khẩu <span style={{ color: 'red' }}>*</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Nhập lại mật khẩu"
-                    value={confirmPassword}
-                    onChange={handleInputChange(setConfirmPassword, 'confirmPassword')} // Xóa lỗi khi người dùng bắt đầu nhập lại
-                    required
-                  />
-                  {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
-                </div>
-
-                {/* Nút hoàn tất */}
-                <button type="submit" className="continue-btn">
-                  Hoàn tất
-                </button>
-              </>
+              <CompletionForm
+                fullName={fullName}
+                emailOrPhone={emailOrPhone}
+                password={password}
+                confirmPassword={confirmPassword}
+                onFullNameChange={handleInputChange(setFullName, 'fullName')}
+                onPasswordChange={handleInputChange(setPassword, 'password')}
+                onConfirmPasswordChange={handleInputChange(setConfirmPassword, 'confirmPassword')}
+                onSubmit={handleSubmit}
+                errors={errors}
+                validateEmail={validateEmail}
+                validatePhone={validatePhone}
+              />
             )}
           </form>
 
@@ -213,10 +205,10 @@ function AuthForm({ type, onSubmit, onClose }) {
     </div>
   );
 }
+
 AuthForm.propTypes = {
   type: PropTypes.string.isRequired, // Kiểm tra kiểu của `type` là string
   onSubmit: PropTypes.func.isRequired, // Kiểm tra kiểu của `onSubmit` là function
-  initialEmailOrPhone: PropTypes.string, // Kiểm tra kiểu của `initialEmailOrPhone` là string (không bắt buộc)
   onClose: PropTypes.func // Kiểm tra kiểu của `onClose` là function (không bắt buộc)
 };
 

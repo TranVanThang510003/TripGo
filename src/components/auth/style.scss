@@ -21,7 +21,7 @@ $input-height: 37px;
   z-index: 1000;
 }
 
-.login-container {
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +29,7 @@ $input-height: 37px;
   background-color: transparent; // Make container background transparent
 }
 
-.login-box {
+.auth-box {
   background-color: white;
   padding: 30px;
   border-radius: 28px;

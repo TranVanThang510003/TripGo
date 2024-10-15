@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <header className="p-4 flex justify-between items-center">
+    <header className="p-4  flex justify-between items-center">
       <div className="flex items-center space-x-4">
         <img src="logo.png" alt="Logo" />
 

@@ -54,7 +54,7 @@ const HotelCard = ({ hotel }) => {
             </div>
 
             {/* Giá và nút */}
-            <div className="flex flex-col justify-between items-end text-right">
+            <div className="flex flex-col justify-end items-end text-right">
                 <div className="text-2xl font-bold text-customBlue">{hotel.price}đ/đêm</div>
                 <button className="mt-4 px-4 py-2 bg-customBlue text-white rounded-lg hover:bg-blue-700">
                     Xem chi tiết

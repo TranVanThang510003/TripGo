@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import HomePage from "./Page/HomePage";
+// import HomePage from "./Page/HomePage";
 import HotelPage from "./Page/Hotel";
 import "./index.css";
 

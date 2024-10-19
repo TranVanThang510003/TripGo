@@ -15,7 +15,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {Array.from({ length: totalPages }, (_, idx) => (
         <button
           key={idx}
-          className={`px-4 py-2 border ${currentPage === idx + 1 ? 'bg-blue-500 text-white' : 'bg-white'} hover:bg-gray-100`}
+          className={`px-4 py-2 border ${currentPage === idx + 1 ? 'bg-blue-500 text-white' : 'bg-white'} hover:border-blue-500`}
           onClick={() => onPageChange(idx + 1)}
         >
           {idx + 1}

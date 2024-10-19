@@ -39,9 +39,9 @@ const FilterSidebar = () => {
     };
 
     return (
-        <div className="w-80 bg-white flex flex-col">
+        <div className="w-80 flex flex-col">
             {/* Hoạt động trên bản đồ */}
-            <div className="mb-4 w-80 h-56 rounded-3xl border">
+            <div className="mb-4 w-80 bg-white h-56 rounded-3xl border border-[#ACACAC]">
                 <div className="h-44 bg-gray-100 rounded-t-3xl flex justify-center items-center">
                     <img src="../../../public/img/MAP.jpg" alt="Map" className="h-full w-full object-cover rounded-t-3xl" />
                 </div>
@@ -49,7 +49,7 @@ const FilterSidebar = () => {
             </div>
 
             {/* Lựa chọn */}
-            <div className="w-80 flex flex-col items-center rounded-3xl border">
+            <div className="w-80 bg-white flex flex-col items-center rounded-3xl border border-[#ACACAC]">
                 <div className="font-medium text-3xl text-center border-b-4 w-80 h-20 rounded-t-3xl flex items-center justify-center">
                     Lựa chọn
                 </div>
@@ -68,8 +68,9 @@ const FilterSidebar = () => {
                             onChange={handlePriceChange} // Gọi hàm khi giá trị thay đổi
                         />
                         <div className="flex justify-between">
-                            <span>{priceRange[0].toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-                            <span>{priceRange[1].toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                            <div className='w-[100px] h-[25px] border border-spacing-[0.5] border-black rounded-xl flex justify-center items-center'>{priceRange[0].toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
+                            <span>đến</span>
+                            <div className='w-[100px] h-[25px] border border-spacing-[0.5] border-black rounded-xl flex justify-center items-center'>{priceRange[1].toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
                         </div>
                     </div>
 

@@ -1,3 +1,4 @@
+
 const Footer = () => {
   return (
     <footer className="bg-white py-8 border-t mt-12">
